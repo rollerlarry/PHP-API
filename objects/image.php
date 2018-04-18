@@ -25,6 +25,28 @@
 		    return $stmt;
 		}
 
+		function delete(){
+	     
+	        // delete query
+	        $query = "DELETE FROM " . $this->table_name . " WHERE imageID = ?";
+	     
+	        // prepare query
+	        $stmt = $this->conn->prepare($query);
+	     
+	       
+	     
+	        // bind id of record to delete
+	        $stmt->bindParam(1, $this->iamge_id);
+	     
+	        // execute query
+	        if($stmt->execute()){
+	            return true;
+	        }
+	     
+	        return false;
+	         
+	    }
+
 		
 	}
 
