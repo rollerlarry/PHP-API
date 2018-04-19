@@ -1,5 +1,5 @@
 <?php
-	$json = file_get_contents('http://localhost/ProjectPHP-API/project/read.php');
+	$json = file_get_contents('http://localhost/project/read.php');
 
 	$data = json_decode($json);
 	foreach ($data->records as $v) {
