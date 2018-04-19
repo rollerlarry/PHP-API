@@ -92,7 +92,7 @@
 		function delete(){
 	        $query = "DELETE FROM " . $this->table_name . " WHERE imageID = ?";
 	        $stmt = $this->conn->prepare($query);
-	        $stmt->bindParam(1, $this->iamge_id);
+	        $stmt->bindParam(1, $this->image_id);
 	     
 	        if($stmt->execute()){
 	            return true;
