@@ -12,20 +12,20 @@
 			$this->conn = $db;
 		}
 
+		//Read user
 		function read(){
 			$query = "SELECT userID,fullName,userName,password 
 					FROM 
 						" . $this->table_name . "";
 
-			// prepare query statement
 		    $stmt = $this->conn->prepare($query);
 		 
-		    // execute query
 		    $stmt->execute();
 		 
 		    return $stmt;
 		}
 
+		//Create user
 		function create(){
 			$query = "INSERT INTO
                     " . $this->table_name . "
@@ -45,10 +45,9 @@
 	        return false;
 		}
 
-		// update the user
+		// Update user
 	    function update(){
 	     
-	        // update query
 	        $query = "UPDATE
 	                    " . $this->table_name . "
 	                SET
@@ -58,9 +57,7 @@
 	                WHERE
 	                    userID = :user_id";
 	     
-	        // prepare query statement
 	        $stmt = $this->conn->prepare($query);
-	     
 	     
 	        // bind new values
 	        $stmt->bindParam(':full_name', $this->full_name);
@@ -69,28 +66,22 @@
 
 	        $stmt->bindParam(':user_id', $this->user_id);
 	     
-	        // execute the query
 	        if($stmt->execute()){
 	            return true;
 	        }
 	     
 	        return false;
 	    }
-	    // delete the product
+	    //Delete user
 	    function delete(){
 	     
-	        // delete query
 	        $query = "DELETE FROM " . $this->table_name . " WHERE userID = ?";
 	     
-	        // prepare query
 	        $stmt = $this->conn->prepare($query);
-	     
-	       
 	     
 	        // bind id of record to delete
 	        $stmt->bindParam(1, $this->user_id);
 	     
-	        // execute query
 	        if($stmt->execute()){
 	            return true;
 	        }

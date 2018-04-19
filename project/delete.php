@@ -24,7 +24,6 @@
 	// set product id to be deleted
 	$project->project_id = 12;
 
-	 
 	// delete the product
 	if($project->delete()){
 	    echo '{';
