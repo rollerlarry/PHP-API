@@ -34,8 +34,9 @@
      
             array_push($user_arr["records"], $user_item);
         }
-     
+        
         echo json_encode($user_arr);
+        
     }else{
         echo json_encode(
             array("message" => "No user found.")

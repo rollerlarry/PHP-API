@@ -26,7 +26,7 @@
             $image_item=array(
                 "imageid" => $row['imageID'],
                 "imagepath" => $row['imagePath'],
-                "dateceated" => $row['DateCreated']
+                "datecreated" => $row['DateCreated']
                 
             );
      

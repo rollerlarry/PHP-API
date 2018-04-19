@@ -9,7 +9,7 @@
 	 
 	// include database and object file
 	include_once '../config/database.php';
-	include_once '../objects/project.php';
+	include_once '../objects/user.php';
 	 
 	// get database connection
 	$database = new Database();
@@ -17,9 +17,11 @@
 	 
 	$user = new User($db);
 	 
-	// $data = json_decode(file_get_contents("php://input"));
-	 
-	$user->user_id = 24;
+	
+	if(isset($_GET['userid'])){
+		$user_id = $_GET['userid'];
+	}
+	$user->user_id = $user_id;
 	 
 	if($user->delete()){
 	    echo '{';

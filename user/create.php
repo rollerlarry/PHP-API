@@ -15,11 +15,16 @@
 
 	$user = new User($db);
 
-	// $data = json_decode(file_get_contents("php://inputdata"));
 
-	$user->full_name = "ABC";
-	$user->user_name = "abc";
-	$user->password = "123";
+	if(isset($_GET['fullname']) || isset($_GET['username']) || isset($_GET['password'])){
+		$full_name = $_GET['fullname'];
+		$user_name = $_GET['username'];
+		$password = $_GET['password'];
+	}
+
+	$user->full_name = $full_name;
+	$user->user_name = $user_name;
+	$user->password = $password;
 
 
 	if($user->create()){

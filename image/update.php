@@ -16,9 +16,9 @@
 	 
 	$image = new image($db);
 	 
-	// $data = json_decode(file_get_contents("php://input"));
+	//Updating.....
 	 
-	$image->image_id = 23;
+	//$image->image_id = 23;
 	 
 
 	

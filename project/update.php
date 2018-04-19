@@ -15,13 +15,17 @@
 	$db = $database->getConnection();
 	 
 	$project = new Project($db);
+	
+	if(isset($_GET['projectid']) || isset($_GET['projectname']) || isset($_GET['projectfolder'])){
+		$project_id = $_GET['projectid'];
+		$project_name = $_GET['projectname'];
+		$folder_name = $_GET['foldername'];
+	}  
 	 
-	// $data = json_decode(file_get_contents("php://input"));
+	$project->project_id = $project_id;
 	 
-	$project->project_id = 15;
-	 
-	$project->project_name = "ATM Banking";
-	$project->folder_name = "atmbanking";
+	$project->project_name = $project_name;
+	$project->folder_name = $folder_name;
 	 
 	// update the product
 	if($project->update()){

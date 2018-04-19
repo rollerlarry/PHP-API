@@ -64,49 +64,18 @@
 
 
 	        //Move image to folder
-		    $currentDir = getcwd();
-		    $uploadDirectory = "/image/";
+	        // Updating ................
+		    // $currentDir = getcwd();
+		    // $uploadDirectory = "/image/";
 
-		    $folderName = $this->folder_name ."/";
-		    $dateCreated = $this->date_created ."/";
+		    // $folderName = $this->folder_name ."/";
+		    // $dateCreated = $this->date_created ."/";
 
-		    $errors = []; // Store all foreseen and unforseen errors here
+		    
 
-		    $fileExtensions = ['jpeg','jpg','png']; // Get all the file extensions
+		    //$uploadPath = $currentDir.$uploadDirectory .$folderName .$dateCreated . basename($fileName); 
 
-		    $fileName = $this->current_user;
-		    $fileSize = $_FILES['myfile']['size'];
-		    $fileTmpName  = $_FILES['myfile']['tmp_name'];
-		    $fileType = $_FILES['myfile']['type'];
-		    $fileExtension = strtolower(end(explode('.',$fileName)));
-
-		    $uploadPath = $currentDir.$uploadDirectory .$folderName .$dateCreated . basename($fileName); 
-
-		    //Check error in array error
-		    if (isset($_POST['submit'])) {
-
-		        if (! in_array($fileExtension,$fileExtensions)) {
-		            $errors[] = "This file extension is not allowed. Please upload a JPEG or PNG file";
-		        }
-
-		        if ($fileSize > 2000000) {
-		            $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
-		        }
-
-		        if (empty($errors)) {
-		            $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-
-		            if ($didUpload) {
-		                echo "The file " . basename($fileName) . " has been uploaded";
-		            } else {
-		                echo "An error occurred somewhere. Try again";
-		            }
-		        } else {
-		            foreach ($errors as $error) {
-		                echo $error . "These are the errors" . "\n";
-		            }
-		        }
-		    }
+		    
 
 	        if($stmt->execute() && $stmt_img->execute()){
             return true;

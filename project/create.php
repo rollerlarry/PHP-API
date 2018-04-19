@@ -15,16 +15,18 @@
 
 	$project = new Project($db);
 
-	// $data = json_decode(file_get_contents("php://inputdata"));
+
+	if(isset($_GET['projectname']) || isset($_GET['foldername']) || isset($_GET['currentuser'])){
+		$project_name = $_GET['projectname'];
+		$folder_name = $_GET['foldername'];
+		$current_user = $_GET['currentuser'];
+	}
+
+	$project->project_name = $project_name;
+	$project->folder_name = $folder_name;
 
 
-
-	$project->project_name = "ATM Banking";
-	$project->folder_name = "atmbanking";
-
-	// $project->image_name = "123.png";
-
-	$project->current_user = "rollerlarry";
+	$project->current_user = $current_user;
 	
 	if($project->create()){
 	    echo '{';

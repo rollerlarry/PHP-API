@@ -16,14 +16,20 @@
 	 
 	$user = new User($db);
 	 
-	// $data = json_decode(file_get_contents("php://input"));
-	 
-	$user->user_id = 23;
+	if(isset($_GET['userid']) || isset($_GET['fullname']) || isset($_GET['username']) || isset($_GET['password'])){
+
+		$user_id = $_GET['userid'];
+		$full_name = $_GET['fullname'];
+		$user_name = $_GET['username'];
+		$password = $_GET['password'];
+	} 
+
+	$user->user_id = $user_id;
 	 
 
-	$user->full_name = "Alex Nguyen";
-	$user->user_name = "alexnguyen";
-	$user->password = "111";
+	$user->full_name = $full_name;
+	$user->user_name = $user_name;
+	$user->password = $password;
 	 
 	if($user->update()){
 	    echo '{';
