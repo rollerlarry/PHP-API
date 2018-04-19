@@ -9,29 +9,24 @@
 	 
 	// include database and object file
 	include_once '../config/database.php';
-	include_once '../objects/user.php';
+	include_once '../objects/project.php';
 	 
 	// get database connection
 	$database = new Database();
 	$db = $database->getConnection();
 	 
-	// prepare product object
 	$user = new User($db);
 	 
-	// get product id
 	// $data = json_decode(file_get_contents("php://input"));
 	 
-	// set product id to be deleted
 	$user->user_id = 24;
 	 
-	// delete the product
 	if($user->delete()){
 	    echo '{';
 	        echo '"message": "User was deleted."';
 	    echo '}';
 	}
 	 
-	// if unable to delete the product
 	else{
 	    echo '{';
 	        echo '"message": "Unable to delete user."';

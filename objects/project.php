@@ -1,5 +1,6 @@
 <?php 
 	class Project{
+		
 		private $conn;
 		private $table_name = "tbproject";
 
@@ -10,9 +11,11 @@
 
 		//Image
 		private $table_name_img = "tbimage";
-		public $date_created;
 		public $current_user;
+		public $date_created;	
 
+		
+			
 		public function __construct($db){
 			$this->conn = $db;
 		}
@@ -49,16 +52,15 @@
 
 
     		//Insert image path for sql
-    		$image_path=$this->folder_name.'/'.$this->current_user;
-
+    		date_default_timezone_set('Asia/Ho_Chi_Minh');
+	        $date_created = date('d-m-Y');
+	        $imageDir = '/image/';
+			$image_path=$imageDir.$this->folder_name.'/'.$date_created.'/'.$this->current_user;
 			$query_img = "INSERT INTO
                     	" . $this->table_name_img . "
                 	SET
-                    imagePath= '{$image_path}', DateCreated= :date_created";
-
+                    imagePath= '{$image_path}', DateCreated= '{$date_created}'";
             $stmt_img = $this->conn->prepare($query_img);
-
-	        $stmt_img->bindParam(":date_created", $this->date_created);
 
 
 	        //Move image to folder
@@ -142,54 +144,43 @@
 	    // Delete project
 	    function delete(){
 
-	     	$dbc = mysqli_connect('localhost','root','','db');
-	        // delete query
-	        //$query_del = "DELETE FROM " . $this->table_name . " WHERE projectID = ?";
-	     	$query_del = "SELECT folderName FROM " . $this->table_name . " WHERE projectID = 22";
+
+	        $query_del = "DELETE FROM " . $this->table_name . " WHERE projectID = " . $this->project_id."";
+	     	$query_sl = "SELECT folderName FROM " . $this->table_name . " WHERE projectID = " . $this->project_id."";
 
 	        // prepare query
 	        $stmt_del = $this->conn->prepare($query_del);
-	        //$stmt_sl = $this->conn->prepare($query_sl);
 
-	        // bind id of record to delete
-	        //$stmt_del->bindParam(':project_id', $this->project_id);
 
-	        //$stmt_sl->bindParam(1, $this->project_id);
-	        // $rows = $stmt_del->fetch(PDO::FETCH_ASSOC);
-	        // $need = $rows['folderName'];
+	        $stmt_sl = $this->conn->prepare($query_sl);
+		    $stmt_sl->execute();
+		    $row = $stmt_sl->fetch(PDO::FETCH_ASSOC);
 
-	        // rmdir($need);
 
-	        $result_sl = mysqli_query($dbc,$query_del);
-	        $rows = mysqli_fetch_assoc($result_sl);
-
-	        
 	        //Delete folder and subfolder of project
 	       function delete_directory($dirname) {
-				         if (is_dir($dirname))
-				           $dir_handle = opendir($dirname);
-				     if (!$dir_handle)
-				          return false;
-				     while($file = readdir($dir_handle)) {
-				           if ($file != "." && $file != "..") {
-				                if (!is_dir($dirname."/".$file))
-				                     unlink($dirname."/".$file);
-				                else
-				                     delete_directory($dirname.'/'.$file);
-				           }
-				     }
+	         if (is_dir($dirname))
+	           $dir_handle = opendir($dirname);
+		     if (!$dir_handle)
+		          return false;
+		     while($file = readdir($dir_handle)) {
+		           if ($file != "." && $file != "..") {
+		                if (!is_dir($dirname."/".$file))
+		                     unlink($dirname."/".$file);
+		                else
+		                     delete_directory($dirname.'/'.$file);
+		           }
+		     }
 				     closedir($dir_handle);
 				     rmdir($dirname);
 				     return true;
 				}
-	        $dirname = $rows['folderName'];
 
+			//get foldername to del it
+	        $dirname =  $row['folderName'];
 	        delete_directory($dirname);
 
-	        // rmdir('atmbangking');
-	     
 
-	        // execute query
 	        if($stmt_del->execute()){
 	            return true;
 	        }

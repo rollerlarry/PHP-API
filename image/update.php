@@ -6,35 +6,32 @@
 	header("Access-Control-Max-Age: 3600");
 	header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 	 
-	 
-	// include database and object file
+	// include database and object files
 	include_once '../config/database.php';
-	include_once '../objects/project.php';
+	include_once '../objects/image.php';
 	 
 	// get database connection
 	$database = new Database();
 	$db = $database->getConnection();
 	 
-	// prepare product object
-	$project = new Project($db);
+	$image = new image($db);
 	 
-	// get product id
 	// $data = json_decode(file_get_contents("php://input"));
 	 
-	// set product id to be deleted
-	$project->project_id = 12;
+	$image->image_id = 23;
+	 
 
-	// delete the product
-	if($project->delete()){
+	
+	 
+	if($image->update()){
 	    echo '{';
-	        echo '"message": "Project was deleted."';
+	        echo '"message": "Image was updated."';
 	    echo '}';
 	}
 	 
-	// if unable to delete the product
 	else{
 	    echo '{';
-	        echo '"message": "Unable to delete project."';
+	        echo '"message": "Unable to update image."';
 	    echo '}';
 	}
 ?>

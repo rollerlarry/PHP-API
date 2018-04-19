@@ -22,8 +22,7 @@
 	$project->project_name = "ATM Banking";
 	$project->folder_name = "atmbanking";
 
-	$project->image_name = "123.png";
-	$project->date_created ="12/12/1222";
+	// $project->image_name = "123.png";
 
 	$project->current_user = "rollerlarry";
 	
@@ -38,7 +37,7 @@
 	        echo '"message": "Unable to create project."';
 	    echo '}';
 	}
-
+	
 
 
  ?>
