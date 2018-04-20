@@ -1,4 +1,5 @@
-<?php 
+
+ <?php 
 	// Required headers
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
@@ -9,11 +10,13 @@
 	// Include database and object files
 	include_once '../config/database.php';	
 	include_once '../objects/project.php';
+	include_once '../objects/image.php';
 
 	$database = new Database();
 	$db = $database->getConnection();
 
 	$project = new Project($db);
+	
 
 
 	if(isset($_GET['projectname']) || isset($_GET['foldername']) || isset($_GET['currentuser'])){
@@ -24,11 +27,17 @@
 
 	$project->project_name = $project_name;
 	$project->folder_name = $folder_name;
-
-
 	$project->current_user = $current_user;
+
+
+	$image = new Image($db);
 	
-	if($project->create()){
+	$image->current_user = $current_user;
+	$image->folder_name = $folder_name;
+
+	
+
+	if($project->create() && $image->create()){
 	    echo '{';
 	        echo '"message": "Project was created."';
 	    echo '}';
