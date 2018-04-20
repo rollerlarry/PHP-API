@@ -9,13 +9,13 @@ User
 Project 
 	->Read   : url :  http://localhost/project/read.php
 	->Create : url :  http://localhost/project/create.php?projectname=VPN&foldername=vpn&currentuser=roller
-	->Update : url :  http://localhost/project/update.php?projectid=74&projectname=SSCC&foldername=sscc
+	->Update : url :  http://localhost/ProjectPHP-API/project/update.php?projectid=74&projectname=SSCC&foldername=ssccr&currentuser=roller
 	->Delete : url :  http://localhost/project/delete.php?projectid=72
 
 
 Image
 	->Read   : url :  http://localhost/image/read.php
-	->Create : url :  updating.....
+	->Create : url :  Image will been create when create project
 	->Update : url :  updating....
 	->Delete : url :  http://localhost/image/delete.php?imageid=33
 
