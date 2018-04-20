@@ -27,7 +27,7 @@
 
 			if (isset($_POST['btnUpload']))
 			{
-			$url = "http://localhost/ProjectPHP-API/project/create.php"; // request URL
+			$url = "http://localhost/project/create.php"; // request URL
 			$filename = $_FILES['file']['name'];
 			$filedata = $_FILES['file']['tmp_name'];
 			$filesize = $_FILES['file']['size'];
