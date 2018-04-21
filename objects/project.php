@@ -3,11 +3,14 @@
 		
 		private $conn;
 		private $table_name = "tbproject";
+		private $table_name_img = "tbimage";
 
 		public $project_id;
 		public $project_name;
 		public $folder_name;
 		public $current_user;
+
+		
 
 		public function __construct($db){
 			$this->conn = $db;
@@ -28,16 +31,24 @@
 		//Create project
 		function create(){
 
+			//Select image id to insert column image id in tbproject
+			$query_sl = "SELECT imageID FROM " . $this->table_name_img . " ORDER BY imageID DESC LIMIT 1";
+			$stmt_sl = $this->conn->prepare($query_sl);
+			$stmt_sl->execute();
+			$row = $stmt_sl->fetch(PDO::FETCH_ASSOC);
+			$image_id = $row['imageID'] + 1;
+
 			//Insert project data for sql
 			$query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    projectName=:project_name, folderName=:folder_name";
+                    projectName=:project_name, folderName=:folder_name, imageID= $image_id";
 
             $stmt = $this->conn->prepare($query);
 
             $stmt->bindParam(":project_name", $this->project_name);
 	        $stmt->bindParam(":folder_name", $this->folder_name);
+
 
 	        if($stmt->execute()){
             return true;
