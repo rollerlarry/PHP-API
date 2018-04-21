@@ -24,6 +24,11 @@
 		$current_user = $_GET['currentuser'];
 	}  
 	 
+	$image = new Image($db);
+	
+	$image->current_user = $current_user;
+	$image->folder_name = $folder_name;
+	$image->project_id = $project_id;
 	$project->project_id = $project_id;
 	 
 	$project->project_name = $project_name;
@@ -31,13 +36,12 @@
 	$project->current_user = $current_user;
 
 
-	$image = new Image($db);
+
+
 	
-	$image->current_user = $current_user;
-	$image->folder_name = $folder_name;
 	 
 	// update the product
-	if($project->update()){
+	if($project->update() && $image->update()){
 	    echo '{';
 	        echo '"message": "Project was updated."';
 	    echo '}';
